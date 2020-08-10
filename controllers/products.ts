@@ -1,31 +1,9 @@
 import { Client } from "https://deno.land/x/postgres/mod.ts";
-import { v4 } from "https://deno.land/std/uuid/mod.ts";
 import { Product } from "../types.ts";
 import { dbCreds } from "../config.ts";
 
 // Init client
 const client = new Client(dbCreds);
-
-let products: Product[] = [
-  {
-    id: "1",
-    name: "Product One",
-    description: "This is product one",
-    price: 29.99,
-  },
-  {
-    id: "2",
-    name: "Product Two",
-    description: "This is product two",
-    price: 39.99,
-  },
-  {
-    id: "3",
-    name: "Product Three",
-    description: "This is product three",
-    price: 59.99,
-  },
-];
 
 // @author  crypt096
 // @desc    Get all products
@@ -124,7 +102,8 @@ const addProduct = async ({
   response: any;
 }) => {
   const body = await request.body();
-  const product = body.value;
+  const product = await body.value;
+  console.log(product);
 
   if (!request.hasBody) {
     response.status = 400;
@@ -183,7 +162,7 @@ const updateProduct = async ({
     return;
   } else {
     const body = await request.body();
-    const product = body.value;
+    const product = await body.value;
 
     if (!request.hasBody) {
       response.status = 400;

@@ -6,7 +6,7 @@
   "scripts": {
     "start": {
       "cmd": "deno run server.ts",
-      "allow": ["net", "env"],
+      "allow": ["env", "net", "read", "write"],
       "env": {
         "PORT": "5000"
       }
